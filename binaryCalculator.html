@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary-Calculator</title>
+</head>
+<style>
+    body {
+  width: 33%;
+}
+
+#res {
+  background-color: lightgray;
+  border: solid;
+  height: 48px;
+  font-size: 20px;
+}
+
+#btns button {
+  width: 25%;
+  height: 36px;
+  font-size: 18px;
+  margin:0;
+  float: left;
+}
+
+#btn0, #btn1 {
+  background-color: lightgreen;
+  color: brown;
+}
+
+#btnClr, #btnEql {
+  background-color: darkgreen;
+  color: white;
+}
+
+#btnSum, #btnSub, #btnMul, #btnDiv {
+  background-color: black;
+  color: red;
+}
+</style>
+<body>
+    <div id = "res">
+    </div>
+    <div id = "btns">
+        <button onclick="pressDigit(this)"id="btn0">0</button>
+        <button onclick="pressDigit(this)"id="btn1">1</button>
+        <button onclick="allClear()"id="btnClr">C</button>
+        <button onclick="result()"id="btnEql">=</button>
+        <button onclick="pressOperator(this)"id="btnSum">+</button>
+        <button onclick="pressOperator(this)"id="btnSub">-</button>
+        <button onclick="pressOperator(this)"id="btnMul">*</button>
+        <button onclick="pressOperator(this)"id="btnDiv">/</button>
+    </div>
+    <script>
+        let operator='';
+        let res = document.getElementById("res");
+        function pressDigit(e){
+            let nums = e.innerHTML;
+            res.innerHTML += nums;
+        }
+        function pressOperator(o)
+        {
+            operator = o.innerHTML;
+            res.innerHTML += operator;
+        }
+        function allClear()
+        {
+            document.getElementById("res").innerHTML = " ";
+            operator='';
+        }
+        function result(){
+            let operand = res.innerHTML.split(operator);
+            const result = Math.floor(eval(parseInt(operand[0],2) + operator + parseInt(operand[1],2)));
+            const mainResult = result.toString(2);
+            res.innerHTML = mainResult;
+        }
+    </script>
+    
+</body>
+</html>
